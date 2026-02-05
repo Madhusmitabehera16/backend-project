@@ -6,15 +6,30 @@ const userRoutes = require("./routes/user.routes");
 const bookingRoutes = require("./routes/booking.routes");
 const hotelRoutes = require("./routes/hotel.routes");
 const roomRoutes = require("./routes/room.routes");
-const errorHandler = require("./middleware/error.middleware");
 const paymentRoutes = require("./routes/payment.routes");
 
-
+const errorHandler = require("./middleware/error.middleware");
 
 const app = express();
 
-app.use(cors());
+/* ======================
+   🔹 MIDDLEWARES
+====================== */
+
+// 🔥 CORS (REQUIRED for Next.js + Google OAuth)
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
+// 🔹 JSON parser
 app.use(express.json());
+
+/* ======================
+   🔹 ROUTES (UNCHANGED)
+====================== */
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
@@ -23,10 +38,23 @@ app.use("/api/bookings", bookingRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/payment", paymentRoutes);
 
+/* ======================
+   🔹 DEBUG ROUTES (NEW)
+====================== */
 
+// Root check
 app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
+
+// 🔥 AUTH DEBUG (VERY IMPORTANT)
+app.get("/api/auth/test", (req, res) => {
+  res.send("Auth route working ✅");
+});
+
+/* ======================
+   🔹 ERROR HANDLER
+====================== */
 
 app.use(errorHandler);
 

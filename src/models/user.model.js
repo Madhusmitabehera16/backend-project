@@ -5,23 +5,27 @@ const userSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true,
     },
-
     email: {
       type: String,
       required: true,
       unique: true,
-      lowercase: true,
     },
-
     password: {
       type: String,
-      required: true,
+      default: null,
     },
-
+    googleId: {
+      type: String,
+      default: null,
+    },
     avatar: {
-      type: String, // Cloudinary image URL
+      type: String,
+    },
+    role: {
+      type: String,
+      enum: ["guest", "owner", "admin"],
+      default: "guest",
     },
   },
   { timestamps: true }

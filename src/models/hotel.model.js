@@ -73,5 +73,8 @@ const hotelSchema = new mongoose.Schema(
 
 // GEO INDEX FOR LOCATION SEARCH
 hotelSchema.index({ location: "2dsphere" });
+// hotelSchema.index({ "address.city": 1 });
+hotelSchema.index({ minPrice: 1 });
+hotelSchema.index({ rating: -1 });
 
 module.exports = mongoose.model("Hotel", hotelSchema);
