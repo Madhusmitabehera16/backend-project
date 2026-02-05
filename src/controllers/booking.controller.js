@@ -46,5 +46,21 @@ const createBooking = async (req, res) => {
     res.status(500).json({ message: "Booking failed" });
   }
 };
+const getMyBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find({ user: req.user._id })
+      .populate("hotel")
+      .populate("room")
+      .sort({ createdAt: -1 });
 
-module.exports = { createBooking };
+    res.json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch bookings" });
+  }
+};
+
+module.exports = {
+  createBooking,
+  getMyBookings,
+};
+

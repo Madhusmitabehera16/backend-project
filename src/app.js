@@ -7,7 +7,7 @@ const bookingRoutes = require("./routes/booking.routes");
 const hotelRoutes = require("./routes/hotel.routes");
 const roomRoutes = require("./routes/room.routes");
 const paymentRoutes = require("./routes/payment.routes");
-
+const contactRoutes = require("./routes/contact.routes");
 const errorHandler = require("./middleware/error.middleware");
 
 const app = express();
@@ -36,7 +36,9 @@ app.use("/api/user", userRoutes);
 app.use("/api/hotels", hotelRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/rooms", roomRoutes);
-app.use("/api/payment", paymentRoutes);
+app.use("/api/payments", paymentRoutes);
+app.use("/api/contact", contactRoutes);
+
 
 /* ======================
    🔹 DEBUG ROUTES (NEW)
