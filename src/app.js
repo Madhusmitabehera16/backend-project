@@ -19,7 +19,7 @@ const app = express();
 // 🔥 CORS (REQUIRED for Next.js + Google OAuth)
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://luxstay-frontend-8yer.onrender.com",
     credentials: true,
   })
 );
